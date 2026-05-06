@@ -10,6 +10,9 @@
 .results-header h1 {
   margin-bottom: var(--space-sm);
 }
+.results-header h1:focus {
+  outline: none;
+}
 .results-date {
   color: var(--text-muted);
   font-size: 0.9rem;

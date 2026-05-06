@@ -1,5 +1,6 @@
 /**
  * Results Page — FR-06, FR-07, FR-08, FR-09, FR-10, FR-11, FR-12
+ * Phase 7: Accessibility, polished animations, improved PDF.
  */
 
 import { getData, getScores, getCompletionDate, resetState } from '../state.js';
@@ -27,40 +28,42 @@ export function renderResults(app) {
   });
   const dateFileStr = completionDate.toISOString().slice(0, 10);
 
+  // Sort scores for overview: highest and lowest
+  const sorted = [...scores].sort((a, b) => b.wheelScore - a.wheelScore);
+  const strongest = sorted[0];
+  const weakest = sorted[sorted.length - 1];
+
   app.innerHTML = `
     <div class="results-page container-wide" style="margin: 0 auto;">
       <div id="pdf-content">
         <!-- Header -->
         <div class="results-header animate-fade-in-up">
-          <h1>🎡 Your Wheel of Career</h1>
+          <h1 id="main-content" tabindex="-1">🎡 Your Wheel of Career</h1>
           <p class="results-date">Completed on ${dateStr}</p>
         </div>
 
         <!-- Wheel Chart -->
         <div class="wheel-section animate-scale-in">
-          <div class="wheel-wrapper">
-            <canvas id="wheel-chart"></canvas>
+          <div class="wheel-wrapper" role="img" aria-label="Radar chart showing your scores across 8 career dimensions. Strongest: ${strongest.name} at ${strongest.wheelScore.toFixed(1)}. Weakest: ${weakest.name} at ${weakest.wheelScore.toFixed(1)}.">
+            <canvas id="wheel-chart" aria-hidden="true"></canvas>
           </div>
         </div>
 
         <!-- Score Cards -->
-        <div class="score-section">
+        <section class="score-section" aria-label="Score summary">
           <h2>📊 Score Summary</h2>
           <div class="score-grid stagger-children">
             ${scores.map(s => `
-              <div class="score-card" style="--card-color: ${s.color}">
-                <style>
-                  .score-card[style*="${s.color}"]::before { background: ${s.color}; }
-                </style>
+              <div class="score-card" data-color="${s.color}" aria-label="${s.name}: ${s.wheelScore.toFixed(1)} out of 10, ${s.interpretation}">
                 <div class="score-card-header">
                   <div class="score-card-name">
-                    <span class="score-card-icon">${s.icon}</span>
+                    <span class="score-card-icon" aria-hidden="true">${s.icon}</span>
                     ${s.name}
                   </div>
                   <span class="score-badge ${s.interpretationClass}">${s.interpretation}</span>
                 </div>
                 <div class="score-card-value" style="color: ${s.color}">${s.wheelScore.toFixed(1)}<span style="font-size: 0.9rem; color: var(--text-muted)"> / 10</span></div>
-                <div class="score-card-bar">
+                <div class="score-card-bar" role="progressbar" aria-valuenow="${s.wheelScore * 10}" aria-valuemin="0" aria-valuemax="100">
                   <div class="score-card-bar-fill" style="width: ${s.wheelScore * 10}%; background: ${s.color}"></div>
                 </div>
                 <div class="score-card-details">
@@ -69,10 +72,10 @@ export function renderResults(app) {
               </div>
             `).join('')}
           </div>
-        </div>
+        </section>
 
         <!-- Interpretation Guide -->
-        <div class="interpretation-section">
+        <section class="interpretation-section" aria-label="Score interpretation guide">
           <h2>📖 Interpretation Guide</h2>
           <div class="interpretation-grid">
             ${data.interpretation.map(interp => `
@@ -82,17 +85,17 @@ export function renderResults(app) {
               </div>
             `).join('')}
           </div>
-        </div>
+        </section>
 
         <!-- Personalized Insights -->
-        <div class="insights-section">
+        <section class="insights-section" aria-label="Personalized insights for each dimension">
           <h2>💡 Personalized Insights</h2>
           <div class="stagger-children">
             ${scores.map(s => `
               <div class="insight-card" style="border-left-color: ${s.color}">
                 <div class="insight-card-header">
                   <span class="insight-card-title">
-                    ${s.icon} ${s.name}
+                    <span aria-hidden="true">${s.icon}</span> ${s.name}
                     <span class="score-badge ${s.interpretationClass}" style="margin-left: 8px; font-size: 0.75rem;">${s.wheelScore.toFixed(1)}</span>
                   </span>
                 </div>
@@ -100,32 +103,32 @@ export function renderResults(app) {
               </div>
             `).join('')}
           </div>
-        </div>
+        </section>
 
         <!-- Reflection Questions -->
-        <div class="reflections-section">
+        <section class="reflections-section" aria-label="Reflection questions for self-development">
           <h2>🤔 Reflection Questions</h2>
-          <ul class="reflection-list stagger-children">
+          <ol class="reflection-list stagger-children">
             ${data.reflectionQuestions.map((q, i) => `
               <li class="reflection-item">
-                <span class="reflection-number">${i + 1}</span>
+                <span class="reflection-number" aria-hidden="true">${i + 1}</span>
                 <span class="reflection-text">${q}</span>
               </li>
             `).join('')}
-          </ul>
-        </div>
+          </ol>
+        </section>
 
         <!-- Disclaimer in PDF -->
-        <div class="landing-privacy" style="margin-bottom: var(--space-lg);">
+        <aside class="landing-privacy" style="margin-bottom: var(--space-lg);" aria-label="Disclaimer">
           <strong>Disclaimer</strong>
           <em>${data.meta.disclaimer}</em>
-        </div>
+        </aside>
       </div>
 
       <!-- Action Buttons (not in PDF content) -->
       <div class="results-actions no-print">
-        <button class="btn btn-primary btn-lg" id="download-pdf-btn">📄 Download PDF</button>
-        <button class="btn btn-outline" id="retake-btn">🔄 Retake Assessment</button>
+        <button class="btn btn-primary btn-lg" id="download-pdf-btn" aria-label="Download your results as a PDF file">📄 Download PDF</button>
+        <button class="btn btn-outline" id="retake-btn" aria-label="Retake the assessment from the beginning">🔄 Retake Assessment</button>
       </div>
     </div>
   `;
@@ -133,14 +136,40 @@ export function renderResults(app) {
   // Render radar chart
   renderWheel(scores);
 
+  // Apply dynamic score-card left-border colors
+  document.querySelectorAll('.score-card').forEach(card => {
+    const color = card.dataset.color;
+    card.style.setProperty('--card-accent', color);
+    const before = document.createElement('style');
+    before.textContent = `.score-card[data-color="${color}"]::before { background: ${color}; }`;
+    card.appendChild(before);
+  });
+
   // Bind PDF download
-  document.getElementById('download-pdf-btn').addEventListener('click', () => {
-    downloadPDF(app, dateFileStr);
+  document.getElementById('download-pdf-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('download-pdf-btn');
+    btn.classList.add('btn-loading');
+    btn.disabled = true;
+    try {
+      await downloadPDF(app, dateFileStr);
+      showToast('✅ PDF downloaded successfully!', 'success');
+    } catch (err) {
+      showToast('❌ PDF generation failed. Please try again.', 'error');
+    } finally {
+      btn.classList.remove('btn-loading');
+      btn.disabled = false;
+    }
   });
 
   // Bind retake with confirmation
   document.getElementById('retake-btn').addEventListener('click', () => {
-    showRetakeConfirmation(app);
+    showRetakeConfirmation();
+  });
+
+  // Focus the heading on results load
+  requestAnimationFrame(() => {
+    const heading = document.getElementById('main-content');
+    if (heading) heading.focus({ preventScroll: true });
   });
 
   // Cleanup function
@@ -160,9 +189,6 @@ function renderWheel(scores) {
   const labels = scores.map(s => s.name);
   const values = scores.map(s => s.wheelScore);
   const colors = scores.map(s => s.color);
-
-  // Create gradient fill
-  const bgColors = colors.map(c => c + '30'); // 30 = ~19% opacity hex
 
   chartInstance = new Chart(ctx, {
     type: 'radar',
@@ -185,6 +211,10 @@ function renderWheel(scores) {
     options: {
       responsive: true,
       maintainAspectRatio: true,
+      animation: {
+        duration: 800,
+        easing: 'easeOutQuart',
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -233,12 +263,15 @@ function renderWheel(scores) {
   });
 }
 
-function showRetakeConfirmation(app) {
+function showRetakeConfirmation() {
   const overlay = document.createElement('div');
   overlay.className = 'modal-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-labelledby', 'retake-title');
   overlay.innerHTML = `
     <div class="modal-content">
-      <h3>🔄 Retake Assessment?</h3>
+      <h3 id="retake-title">🔄 Retake Assessment?</h3>
       <p>This will clear all your current answers and results. Are you sure you want to start over?</p>
       <div class="modal-actions">
         <button class="btn btn-secondary" id="cancel-retake">Cancel</button>
@@ -248,6 +281,31 @@ function showRetakeConfirmation(app) {
   `;
 
   document.body.appendChild(overlay);
+
+  // Focus the cancel button by default (safe choice)
+  requestAnimationFrame(() => {
+    document.getElementById('cancel-retake').focus();
+  });
+
+  // Trap focus inside modal
+  overlay.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      overlay.remove();
+      return;
+    }
+    if (e.key === 'Tab') {
+      const focusable = overlay.querySelectorAll('button');
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  });
 
   document.getElementById('cancel-retake').addEventListener('click', () => {
     overlay.remove();
@@ -262,4 +320,28 @@ function showRetakeConfirmation(app) {
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) overlay.remove();
   });
+}
+
+/**
+ * Show a toast notification.
+ */
+function showToast(message, type = 'info') {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.classList.add('toast-visible');
+  });
+
+  setTimeout(() => {
+    toast.classList.remove('toast-visible');
+    setTimeout(() => toast.remove(), 300);
+  }, 3500);
 }
