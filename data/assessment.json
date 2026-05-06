@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "title": "Wheel of Career Assessment",
+    "description": "A structured self-assessment framework that evaluates 8 key dimensions of career health. This tool helps you reflect on your current career status, identify strengths and development areas, and support career coaching, mentoring, and development conversations.",
+    "estimatedTime": "8–12 minutes",
+    "totalQuestions": 40,
+    "privacyNotice": "This assessment is designed for personal career reflection and development. Your responses will be used to generate your Wheel of Career result. Individual results will not be shared unless a formal data storage and access process is approved and clearly communicated.",
+    "disclaimer": "The Wheel of Career Assessment is a self-reflection and development tool. It is not a formal performance evaluation and should not be used as the sole basis for promotion, compensation, or employment decisions."
+  },
+  "sections": [
+    {
+      "id": "role-clarity",
+      "name": "Role Clarity",
+      "color": "#3B82F6",
+      "icon": "🎯",
+      "questions": [
+        { "id": "q1", "text": "I clearly understand what is expected from me in my current role.", "options": [{ "label": "A", "text": "Not clear at all", "score": 1 }, { "label": "B", "text": "Slightly clear", "score": 2 }, { "label": "C", "text": "Moderately clear", "score": 3 }, { "label": "D", "text": "Mostly clear", "score": 4 }, { "label": "E", "text": "Completely clear", "score": 5 }] },
+        { "id": "q2", "text": "I understand how my role contributes to the broader goals of the organization.", "options": [{ "label": "A", "text": "I do not understand the connection", "score": 1 }, { "label": "B", "text": "I have limited understanding", "score": 2 }, { "label": "C", "text": "I understand some of the connection", "score": 3 }, { "label": "D", "text": "I understand it well", "score": 4 }, { "label": "E", "text": "I understand it very clearly", "score": 5 }] },
+        { "id": "q3", "text": "My responsibilities and decision-making authority are clearly defined.", "options": [{ "label": "A", "text": "Not defined", "score": 1 }, { "label": "B", "text": "Poorly defined", "score": 2 }, { "label": "C", "text": "Somewhat defined", "score": 3 }, { "label": "D", "text": "Mostly defined", "score": 4 }, { "label": "E", "text": "Very clearly defined", "score": 5 }] },
+        { "id": "q4", "text": "I know which priorities matter most in my role.", "options": [{ "label": "A", "text": "I am often unsure", "score": 1 }, { "label": "B", "text": "I have limited clarity", "score": 2 }, { "label": "C", "text": "I know some priorities", "score": 3 }, { "label": "D", "text": "I know most priorities", "score": 4 }, { "label": "E", "text": "I have full clarity", "score": 5 }] },
+        { "id": "q5", "text": "My manager or stakeholders provide clear direction when needed.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] }
+      ],
+      "insights": {
+        "high": "You appear to have strong clarity about your role, expectations, and priorities. Continue aligning regularly with your manager and stakeholders to maintain this clarity.",
+        "medium": "Your role clarity is generally good, but there may be areas where expectations, priorities, or decision rights can be sharpened.",
+        "low": "Role clarity may need attention. Consider discussing your mandate, priorities, and decision rights with your manager."
+      }
+    },
+    {
+      "id": "performance-impact",
+      "name": "Performance & Impact",
+      "color": "#F59E0B",
+      "icon": "📈",
+      "questions": [
+        { "id": "q6", "text": "I deliver results that clearly contribute to business outcomes.", "options": [{ "label": "A", "text": "Rarely", "score": 1 }, { "label": "B", "text": "Occasionally", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] },
+        { "id": "q7", "text": "My work has measurable impact.", "options": [{ "label": "A", "text": "Not measurable", "score": 1 }, { "label": "B", "text": "Limited measurable impact", "score": 2 }, { "label": "C", "text": "Some measurable impact", "score": 3 }, { "label": "D", "text": "Strong measurable impact", "score": 4 }, { "label": "E", "text": "Highly measurable and visible impact", "score": 5 }] },
+        { "id": "q8", "text": "I consistently meet or exceed my performance objectives.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] },
+        { "id": "q9", "text": "I focus my effort on work that creates real value.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] },
+        { "id": "q10", "text": "My achievements are visible to relevant stakeholders.", "options": [{ "label": "A", "text": "Not visible", "score": 1 }, { "label": "B", "text": "Slightly visible", "score": 2 }, { "label": "C", "text": "Moderately visible", "score": 3 }, { "label": "D", "text": "Mostly visible", "score": 4 }, { "label": "E", "text": "Highly visible", "score": 5 }] }
+      ],
+      "insights": {
+        "high": "Your work appears to create clear and measurable impact. Continue focusing on outcomes that matter to the business.",
+        "medium": "You are contributing value, but there may be opportunities to make your impact more measurable or more visible.",
+        "low": "Performance and impact may need stronger focus. Consider clarifying your objectives and identifying the outcomes that matter most."
+      }
+    },
+    {
+      "id": "skills-capability",
+      "name": "Skills & Capability",
+      "color": "#10B981",
+      "icon": "🛠️",
+      "questions": [
+        { "id": "q11", "text": "I have the skills required to perform my current role effectively.", "options": [{ "label": "A", "text": "Significant gaps", "score": 1 }, { "label": "B", "text": "Some major gaps", "score": 2 }, { "label": "C", "text": "Adequate skills", "score": 3 }, { "label": "D", "text": "Strong skills", "score": 4 }, { "label": "E", "text": "Excellent skills", "score": 5 }] },
+        { "id": "q12", "text": "I am actively developing new capabilities for future career needs.", "options": [{ "label": "A", "text": "Not at all", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Continuously", "score": 5 }] },
+        { "id": "q13", "text": "I keep myself updated on trends, tools, and practices relevant to my field.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] },
+        { "id": "q14", "text": "I receive or seek useful feedback to improve my capabilities.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] },
+        { "id": "q15", "text": "I can confidently handle complex challenges in my area of work.", "options": [{ "label": "A", "text": "Not confident", "score": 1 }, { "label": "B", "text": "Slightly confident", "score": 2 }, { "label": "C", "text": "Moderately confident", "score": 3 }, { "label": "D", "text": "Very confident", "score": 4 }, { "label": "E", "text": "Highly confident", "score": 5 }] }
+      ],
+      "insights": {
+        "high": "You appear confident in your current capabilities and actively prepared for future needs. Continue investing in future-facing skills.",
+        "medium": "Your capabilities are generally strong, but there may be specific skills that require further development.",
+        "low": "Skills and capability may need focused development. Consider creating a learning plan for the capabilities most relevant to your role and future path."
+      }
+    },
+    {
+      "id": "career-growth",
+      "name": "Career Growth",
+      "color": "#F97316",
+      "icon": "🚀",
+      "questions": [
+        { "id": "q16", "text": "I have a clear view of my next career step.", "options": [{ "label": "A", "text": "Not clear at all", "score": 1 }, { "label": "B", "text": "Slightly clear", "score": 2 }, { "label": "C", "text": "Moderately clear", "score": 3 }, { "label": "D", "text": "Mostly clear", "score": 4 }, { "label": "E", "text": "Very clear", "score": 5 }] },
+        { "id": "q17", "text": "I understand what is required to progress to the next level.", "options": [{ "label": "A", "text": "I do not understand", "score": 1 }, { "label": "B", "text": "I have limited understanding", "score": 2 }, { "label": "C", "text": "I understand some requirements", "score": 3 }, { "label": "D", "text": "I understand most requirements", "score": 4 }, { "label": "E", "text": "I understand clearly", "score": 5 }] },
+        { "id": "q18", "text": "I am getting opportunities that prepare me for future roles.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] },
+        { "id": "q19", "text": "I feel my career is progressing at a healthy pace.", "options": [{ "label": "A", "text": "Not progressing", "score": 1 }, { "label": "B", "text": "Progressing slowly", "score": 2 }, { "label": "C", "text": "Progressing moderately", "score": 3 }, { "label": "D", "text": "Progressing well", "score": 4 }, { "label": "E", "text": "Progressing strongly", "score": 5 }] },
+        { "id": "q20", "text": "I have meaningful development conversations about my career.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Regularly and effectively", "score": 5 }] }
+      ],
+      "insights": {
+        "high": "You appear to have a clear and healthy career growth path. Continue seeking opportunities that prepare you for your next step.",
+        "medium": "Your career growth direction is forming, but additional clarity or development conversations may help.",
+        "low": "Career growth may need attention. Consider discussing your next step, required competencies, and development opportunities with your manager or mentor."
+      }
+    },
+    {
+      "id": "leadership-influence",
+      "name": "Leadership & Influence",
+      "color": "#14B8A6",
+      "icon": "👥",
+      "questions": [
+        { "id": "q21", "text": "I am trusted by others to lead or influence important work.", "options": [{ "label": "A", "text": "Rarely trusted", "score": 1 }, { "label": "B", "text": "Sometimes trusted", "score": 2 }, { "label": "C", "text": "Moderately trusted", "score": 3 }, { "label": "D", "text": "Often trusted", "score": 4 }, { "label": "E", "text": "Highly trusted", "score": 5 }] },
+        { "id": "q22", "text": "I can influence decisions beyond my direct responsibilities.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] },
+        { "id": "q23", "text": "I communicate my ideas with clarity and confidence.", "options": [{ "label": "A", "text": "Not confidently", "score": 1 }, { "label": "B", "text": "Slightly confidently", "score": 2 }, { "label": "C", "text": "Moderately confidently", "score": 3 }, { "label": "D", "text": "Very confidently", "score": 4 }, { "label": "E", "text": "Highly confidently", "score": 5 }] },
+        { "id": "q24", "text": "I demonstrate ownership and accountability in my work.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] },
+        { "id": "q25", "text": "I am seen as someone who can guide, support, or inspire others.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] }
+      ],
+      "insights": {
+        "high": "You appear to have strong leadership presence and influence. Continue using this strength to guide work and support others.",
+        "medium": "You have a foundation of leadership and influence, but there may be opportunities to increase visibility, ownership, or stakeholder impact.",
+        "low": "Leadership and influence may need development. Consider opportunities to lead initiatives, communicate ideas, and build trust across stakeholders."
+      }
+    },
+    {
+      "id": "network-relationships",
+      "name": "Network & Relationships",
+      "color": "#8B5CF6",
+      "icon": "🤝",
+      "questions": [
+        { "id": "q26", "text": "I have strong working relationships with key stakeholders.", "options": [{ "label": "A", "text": "Very weak", "score": 1 }, { "label": "B", "text": "Somewhat weak", "score": 2 }, { "label": "C", "text": "Moderate", "score": 3 }, { "label": "D", "text": "Strong", "score": 4 }, { "label": "E", "text": "Very strong", "score": 5 }] },
+        { "id": "q27", "text": "I have access to mentors, sponsors, or trusted advisors.", "options": [{ "label": "A", "text": "No access", "score": 1 }, { "label": "B", "text": "Limited access", "score": 2 }, { "label": "C", "text": "Some access", "score": 3 }, { "label": "D", "text": "Good access", "score": 4 }, { "label": "E", "text": "Strong access", "score": 5 }] },
+        { "id": "q28", "text": "I collaborate effectively with colleagues across teams.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] },
+        { "id": "q29", "text": "I maintain a professional network that supports my growth.", "options": [{ "label": "A", "text": "Not at all", "score": 1 }, { "label": "B", "text": "Limited network", "score": 2 }, { "label": "C", "text": "Moderate network", "score": 3 }, { "label": "D", "text": "Strong network", "score": 4 }, { "label": "E", "text": "Very strong network", "score": 5 }] },
+        { "id": "q30", "text": "People are willing to support me when I need help or alignment.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] }
+      ],
+      "insights": {
+        "high": "You appear to have a strong professional network and healthy stakeholder relationships. Continue nurturing these relationships.",
+        "medium": "Your relationships are generally healthy, but your network could be expanded or made more strategic.",
+        "low": "Network and relationships may need focused attention. Consider identifying key stakeholders, mentors, or sponsors who can support your growth."
+      }
+    },
+    {
+      "id": "compensation-recognition",
+      "name": "Compensation & Recognition",
+      "color": "#EC4899",
+      "icon": "🏆",
+      "questions": [
+        { "id": "q31", "text": "I feel fairly compensated for my contribution.", "options": [{ "label": "A", "text": "Strongly disagree", "score": 1 }, { "label": "B", "text": "Disagree", "score": 2 }, { "label": "C", "text": "Neutral", "score": 3 }, { "label": "D", "text": "Agree", "score": 4 }, { "label": "E", "text": "Strongly agree", "score": 5 }] },
+        { "id": "q32", "text": "My contributions are recognized by my manager or stakeholders.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] },
+        { "id": "q33", "text": "I feel appreciated for the value I bring.", "options": [{ "label": "A", "text": "Not appreciated", "score": 1 }, { "label": "B", "text": "Slightly appreciated", "score": 2 }, { "label": "C", "text": "Moderately appreciated", "score": 3 }, { "label": "D", "text": "Well appreciated", "score": 4 }, { "label": "E", "text": "Highly appreciated", "score": 5 }] },
+        { "id": "q34", "text": "Rewards, promotions, or recognition feel aligned with performance.", "options": [{ "label": "A", "text": "Not aligned", "score": 1 }, { "label": "B", "text": "Slightly aligned", "score": 2 }, { "label": "C", "text": "Moderately aligned", "score": 3 }, { "label": "D", "text": "Mostly aligned", "score": 4 }, { "label": "E", "text": "Strongly aligned", "score": 5 }] },
+        { "id": "q35", "text": "I receive recognition in ways that motivate me.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] }
+      ],
+      "insights": {
+        "high": "You appear to feel fairly recognized and rewarded for your contribution. Continue documenting achievements and maintaining visibility.",
+        "medium": "Recognition and rewards appear acceptable, but there may be room to improve visibility, feedback, or alignment with performance.",
+        "low": "Compensation and recognition may need attention. Consider discussing expectations, achievements, and recognition with your manager through the appropriate channels."
+      }
+    },
+    {
+      "id": "workload-sustainability",
+      "name": "Workload & Sustainability",
+      "color": "#A16207",
+      "icon": "⚖️",
+      "questions": [
+        { "id": "q36", "text": "My workload is manageable.", "options": [{ "label": "A", "text": "Not manageable", "score": 1 }, { "label": "B", "text": "Slightly manageable", "score": 2 }, { "label": "C", "text": "Moderately manageable", "score": 3 }, { "label": "D", "text": "Mostly manageable", "score": 4 }, { "label": "E", "text": "Very manageable", "score": 5 }] },
+        { "id": "q37", "text": "I can maintain good energy and focus throughout the workweek.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] },
+        { "id": "q38", "text": "My work allows enough time for recovery and personal wellbeing.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] },
+        { "id": "q39", "text": "I can deliver quality work without constant pressure or overload.", "options": [{ "label": "A", "text": "Almost never", "score": 1 }, { "label": "B", "text": "Rarely", "score": 2 }, { "label": "C", "text": "Sometimes", "score": 3 }, { "label": "D", "text": "Often", "score": 4 }, { "label": "E", "text": "Consistently", "score": 5 }] },
+        { "id": "q40", "text": "My current work pace is sustainable over the long term.", "options": [{ "label": "A", "text": "Not sustainable", "score": 1 }, { "label": "B", "text": "Slightly sustainable", "score": 2 }, { "label": "C", "text": "Moderately sustainable", "score": 3 }, { "label": "D", "text": "Mostly sustainable", "score": 4 }, { "label": "E", "text": "Highly sustainable", "score": 5 }] }
+      ],
+      "insights": {
+        "high": "Your workload appears manageable and sustainable. Continue protecting your energy and maintaining healthy work practices.",
+        "medium": "Your workload may be manageable most of the time, but there may be periods of pressure that require better prioritization or support.",
+        "low": "Workload and sustainability may need immediate attention. Consider reviewing priorities, workload balance, and support mechanisms with your manager."
+      }
+    }
+  ],
+  "interpretation": [
+    { "min": 8.0, "max": 10.0, "label": "Strong and healthy area", "className": "score-high" },
+    { "min": 6.0, "max": 7.99, "label": "Good, but can be improved", "className": "score-medium" },
+    { "min": 4.0, "max": 5.99, "label": "Needs attention", "className": "score-low" },
+    { "min": 0.0, "max": 3.99, "label": "Priority development area", "className": "score-critical" }
+  ],
+  "reflectionQuestions": [
+    "Which 2 areas scored the highest, and what helped make them strong?",
+    "Which 2 areas scored the lowest, and why?",
+    "What is one area I want to improve over the next 90 days?",
+    "What support do I need from my manager, mentor, or stakeholders?",
+    "What is one action I can start this week?",
+    "Which strength can I use to improve a weaker area?"
+  ]
+}
