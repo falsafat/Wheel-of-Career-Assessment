@@ -151,7 +151,7 @@ export function renderResults(app) {
     btn.classList.add('btn-loading');
     btn.disabled = true;
     try {
-      await downloadPDF(app, dateFileStr);
+      await downloadPDF(app, dateFileStr, scores, data);
       showToast('✅ PDF downloaded successfully!', 'success');
     } catch (err) {
       showToast('❌ PDF generation failed. Please try again.', 'error');
