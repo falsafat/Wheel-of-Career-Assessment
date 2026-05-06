@@ -186,7 +186,18 @@ function renderWheel(scores) {
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
-  const labels = scores.map(s => s.name);
+  // Split long labels into multi-line arrays for Chart.js
+  const labels = scores.map(s => {
+    const words = s.name.split(' ');
+    if (words.length <= 2) return s.name;
+    // Split at the midpoint or after "&"
+    const ampIdx = words.indexOf('&');
+    if (ampIdx > 0) {
+      return [words.slice(0, ampIdx).join(' '), words.slice(ampIdx).join(' ')];
+    }
+    const mid = Math.ceil(words.length / 2);
+    return [words.slice(0, mid).join(' '), words.slice(mid).join(' ')];
+  });
   const values = scores.map(s => s.wheelScore);
   const colors = scores.map(s => s.color);
 
@@ -251,11 +262,11 @@ function renderWheel(scores) {
           pointLabels: {
             color: '#94A3B8',
             font: {
-              size: 11,
+              size: 12,
               family: "'Inter', sans-serif",
               weight: '500',
             },
-            padding: 16,
+            padding: 24,
           },
         },
       },

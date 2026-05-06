@@ -1,7 +1,7 @@
 /**
  * PDF Export — FR-11
  * Generates a multi-page PDF report using html2canvas + jsPDF.
- * Phase 7: Loading state, error handling, performance measurement.
+ * Uses manual blob download for cross-browser reliability.
  */
 
 import { jsPDF } from 'jspdf';
@@ -23,21 +23,20 @@ export async function downloadPDF(resultsContainer, dateStr) {
   }
 
   try {
+    // Capture the content as a canvas — use scale 1.5 for quality/size balance
     const canvas = await html2canvas(pdfContent, {
-      scale: 2,
+      scale: 1.5,
       useCORS: true,
       backgroundColor: '#0F172A',
       logging: false,
-      // Ensure fonts are loaded before capturing
       onclone: (doc) => {
-        // Force all animations to complete state for the clone
+        // Force all animations to their completed state in the clone
         const allAnimated = doc.querySelectorAll('[class*="animate-"], [class*="stagger-"]');
         allAnimated.forEach(el => {
           el.style.animation = 'none';
           el.style.opacity = '1';
           el.style.transform = 'none';
         });
-        // Also force stagger children
         const staggerChildren = doc.querySelectorAll('.stagger-children > *');
         staggerChildren.forEach(el => {
           el.style.animation = 'none';
@@ -47,40 +46,55 @@ export async function downloadPDF(resultsContainer, dateStr) {
       },
     });
 
-    const imgData = canvas.toDataURL('image/png');
+    // Convert canvas to JPEG (much smaller than PNG) at 85% quality
+    const imgData = canvas.toDataURL('image/jpeg', 0.85);
     const pdf = new jsPDF('p', 'mm', 'a4');
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
-    const margin = 10;
-    const imgWidth = pageWidth - (margin * 2);
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const margin = 8;
+    const usableWidth = pageWidth - (margin * 2);
+    const usableHeight = pageHeight - (margin * 2);
+    const imgHeight = (canvas.height * usableWidth) / canvas.width;
 
-    let yPosition = margin;
-    let remainingHeight = imgHeight;
+    let heightLeft = imgHeight;
+    let position = margin;
 
-    // Add first page
-    pdf.addImage(imgData, 'PNG', margin, yPosition, imgWidth, imgHeight);
+    // First page
+    pdf.addImage(imgData, 'JPEG', margin, position, usableWidth, imgHeight);
+    heightLeft -= usableHeight;
 
-    // If content is taller than one page, add more pages
-    remainingHeight -= (pageHeight - (margin * 2));
-    while (remainingHeight > 0) {
+    // Add subsequent pages if content overflows
+    while (heightLeft > 0) {
+      position = -(imgHeight - heightLeft) + margin;
       pdf.addPage();
-      yPosition = -(imgHeight - remainingHeight) + margin;
-      pdf.addImage(imgData, 'PNG', margin, yPosition, imgWidth, imgHeight);
-      remainingHeight -= (pageHeight - (margin * 2));
+      pdf.addImage(imgData, 'JPEG', margin, position, usableWidth, imgHeight);
+      heightLeft -= usableHeight;
     }
 
-    pdf.save(fileName);
+    // Manual blob download for cross-browser reliability
+    const blob = pdf.output('blob');
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+
+    // Cleanup
+    setTimeout(() => {
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }, 200);
 
     const elapsed = performance.now() - startTime;
-    console.log(`PDF generated in ${Math.round(elapsed)}ms`);
+    console.log(`PDF generated: "${fileName}" in ${Math.round(elapsed)}ms`);
 
-    // NFR-02: Warn if generation exceeded 5 seconds
     if (elapsed > 5000) {
-      console.warn('PDF generation exceeded 5 second target.');
+      console.warn('PDF generation exceeded 5-second target.');
     }
   } catch (error) {
     console.error('PDF generation failed:', error);
-    throw error; // Re-throw so the caller can handle it
+    throw error;
   }
 }

@@ -26,15 +26,15 @@
 }
 .wheel-wrapper {
   width: 100%;
-  max-width: 520px;
-  aspect-ratio: 1;
+  max-width: 700px;
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  padding: var(--space-lg);
+  padding: var(--space-2xl) var(--space-3xl);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible;
 }
 
 /* Score table */
@@ -217,7 +217,7 @@
   .score-grid { grid-template-columns: 1fr; }
   .interpretation-grid { grid-template-columns: repeat(2, 1fr); }
   .results-page { padding: var(--space-lg) var(--space-md) var(--space-2xl); }
-  .wheel-wrapper { max-width: 100%; padding: var(--space-md); }
+  .wheel-wrapper { max-width: 100%; padding: var(--space-lg) var(--space-xl); }
 }
 
 @media (max-width: 480px) {
