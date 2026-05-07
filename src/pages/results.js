@@ -6,7 +6,6 @@
 import { getData, getScores, getCompletionDate, resetState } from '../state.js';
 import { navigate } from '../router.js';
 import { Chart, RadarController, RadialLinearScale, PointElement, LineElement, Filler, Tooltip } from 'chart.js';
-import { downloadPDF } from '../utils/pdf-export.js';
 
 // Register Chart.js components
 Chart.register(RadarController, RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
@@ -125,9 +124,9 @@ export function renderResults(app) {
         </aside>
       </div>
 
-      <!-- Action Buttons (not in PDF content) -->
+      <!-- Action Buttons -->
       <div class="results-actions no-print">
-        <button class="btn btn-primary btn-lg" id="download-pdf-btn" aria-label="Download your results as a PDF file">📄 Download PDF</button>
+        <button class="btn btn-primary btn-lg" id="print-pdf-btn" aria-label="Print or save your results as a PDF file">🖨️ Print / Save PDF</button>
         <button class="btn btn-outline" id="retake-btn" aria-label="Retake the assessment from the beginning">🔄 Retake Assessment</button>
       </div>
     </div>
@@ -145,20 +144,9 @@ export function renderResults(app) {
     card.appendChild(before);
   });
 
-  // Bind PDF download
-  document.getElementById('download-pdf-btn').addEventListener('click', async () => {
-    const btn = document.getElementById('download-pdf-btn');
-    btn.classList.add('btn-loading');
-    btn.disabled = true;
-    try {
-      await downloadPDF(app, dateFileStr, scores, data);
-      showToast('✅ PDF downloaded successfully!', 'success');
-    } catch (err) {
-      showToast('❌ PDF generation failed. Please try again.', 'error');
-    } finally {
-      btn.classList.remove('btn-loading');
-      btn.disabled = false;
-    }
+  // Bind Print / PDF
+  document.getElementById('print-pdf-btn').addEventListener('click', () => {
+    window.print();
   });
 
   // Bind retake with confirmation

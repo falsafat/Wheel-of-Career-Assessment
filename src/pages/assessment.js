@@ -178,6 +178,14 @@ export function renderAssessment(app) {
     app.querySelectorAll('.section-dot').forEach(dot => {
       dot.addEventListener('click', () => {
         const idx = parseInt(dot.dataset.section, 10);
+        
+        // Prevent skipping ahead if current section is incomplete
+        if (idx > sectionIndex && !isSectionComplete(sectionIndex)) {
+          highlightUnansweredCurrent(sectionIndex);
+          showToast('⚠️ Please answer all questions before proceeding.', 'error');
+          return;
+        }
+
         const direction = idx > sectionIndex ? 'next' : 'prev';
         setCurrentSection(idx);
         render(direction);
@@ -197,6 +205,11 @@ export function renderAssessment(app) {
     const nextBtn = document.getElementById('next-btn');
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
+        if (!isSectionComplete(sectionIndex)) {
+          highlightUnansweredCurrent(sectionIndex);
+          showToast('⚠️ Please answer all questions before proceeding.', 'error');
+          return;
+        }
         setCurrentSection(sectionIndex + 1);
         render('next');
       });
@@ -220,6 +233,29 @@ export function renderAssessment(app) {
     }
   }
 
+  function highlightUnansweredCurrent(sectionIdx) {
+    const data = getData();
+    const section = data.sections[sectionIdx];
+    let firstError = null;
+    section.questions.forEach(q => {
+      if (getAnswer(q.id) === null) {
+        const card = document.getElementById(`card-${q.id}`);
+        if (card) {
+          card.classList.add('has-error');
+          card.classList.add('animate-shake');
+          if (!firstError) firstError = card;
+        }
+      }
+    });
+    // Scroll to first error
+    if (firstError) {
+      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Focus the first radio in the error card
+      const firstRadio = firstError.querySelector('input[type="radio"]');
+      if (firstRadio) setTimeout(() => firstRadio.focus(), 400);
+    }
+  }
+
   function highlightUnanswered() {
     const data = getData();
     // Find first incomplete section
@@ -229,25 +265,7 @@ export function renderAssessment(app) {
         render('next');
         // After render, highlight unanswered in current section
         setTimeout(() => {
-          const section = data.sections[i];
-          let firstError = null;
-          section.questions.forEach(q => {
-            if (getAnswer(q.id) === null) {
-              const card = document.getElementById(`card-${q.id}`);
-              if (card) {
-                card.classList.add('has-error');
-                card.classList.add('animate-shake');
-                if (!firstError) firstError = card;
-              }
-            }
-          });
-          // Scroll to first error
-          if (firstError) {
-            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            // Focus the first radio in the error card
-            const firstRadio = firstError.querySelector('input[type="radio"]');
-            if (firstRadio) setTimeout(() => firstRadio.focus(), 400);
-          }
+          highlightUnansweredCurrent(i);
         }, 100);
         return;
       }
