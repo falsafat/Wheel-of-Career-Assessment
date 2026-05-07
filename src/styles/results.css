@@ -213,16 +213,6 @@
   flex-wrap: wrap;
 }
 
-.pdf-export-hidden {
-  display: none !important;
-}
-
-.pdf-exporting,
-.pdf-exporting * {
-  animation: none !important;
-  transition: none !important;
-}
-
 @media (max-width: 768px) {
   .score-grid { grid-template-columns: 1fr; }
   .interpretation-grid { grid-template-columns: repeat(2, 1fr); }
