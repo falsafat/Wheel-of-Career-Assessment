@@ -12,84 +12,96 @@ export function renderLanding(app) {
 
   app.innerHTML = `
     <main class="landing-page" id="main-content" role="main">
-      <div class="landing-content animate-fade-in-up">
-        <div class="landing-icon" aria-hidden="true">🎡</div>
-        <h1 class="landing-title">${meta.title}</h1>
-        <p class="landing-subtitle">${meta.description}</p>
+      <!-- Decorative Background Elements -->
+      <div class="bg-orb orb-1"></div>
+      <div class="bg-orb orb-2"></div>
+      <div class="bg-orb orb-3"></div>
 
-        <!-- What is the Wheel of Career -->
-        <section class="landing-about" aria-label="About the Wheel of Career">
-          <h2 class="about-title">What is the Wheel of Career?</h2>
-          <p class="about-text">
-            The Wheel of Career is a self-reflection framework designed to help you evaluate
-            where you stand across the most important dimensions of your professional life.
-            By answering 40 carefully crafted questions, you'll receive a visual radar chart
-            — your personal "career wheel" — that highlights your strengths and areas for growth.
-          </p>
-          <div class="about-highlights">
-            <div class="highlight-item">
-              <span class="highlight-icon" aria-hidden="true">🔍</span>
-              <div>
-                <strong>Self-Awareness</strong>
-                <span>Gain clarity on what's working and what needs attention in your career</span>
-              </div>
-            </div>
-            <div class="highlight-item">
-              <span class="highlight-icon" aria-hidden="true">💬</span>
-              <div>
-                <strong>Development Conversations</strong>
-                <span>Use your results to guide meaningful discussions with managers and mentors</span>
-              </div>
-            </div>
-            <div class="highlight-item">
-              <span class="highlight-icon" aria-hidden="true">📊</span>
-              <div>
-                <strong>Actionable Insights</strong>
-                <span>Receive personalized feedback and reflection questions based on your scores</span>
-              </div>
+      <div class="landing-container">
+        <!-- Left Column: Hero Content -->
+        <div class="landing-hero animate-slide-in-left">
+          <div class="hero-badge">✨ Discover Your Potential</div>
+          <h1 class="landing-title">
+            <span class="title-highlight">Wheel of Career</span><br/>
+            Assessment
+          </h1>
+          <p class="landing-subtitle">${meta.description}</p>
+          
+          <div class="hero-cta">
+            <button id="start-assessment-btn" class="btn btn-primary btn-glow btn-xl" aria-label="Begin the career assessment">
+              Start Assessment <span class="arrow">→</span>
+            </button>
+            <div class="hero-time-estimate">
+              <span aria-hidden="true">⏱️</span> Takes ${meta.estimatedTime}
             </div>
           </div>
-        </section>
 
-        <!-- Assessment overview stats -->
-        <div class="landing-stats" role="list" aria-label="Assessment overview">
-          <div class="stat-card" role="listitem">
-            <div class="stat-value" aria-label="${meta.totalQuestions} questions">${meta.totalQuestions}</div>
-            <div class="stat-label">Questions</div>
-          </div>
-          <div class="stat-card" role="listitem">
-            <div class="stat-value" aria-label="8 career dimensions">8</div>
-            <div class="stat-label">Dimensions</div>
-          </div>
-          <div class="stat-card" role="listitem">
-            <div class="stat-value stat-value-time" aria-label="Estimated time: ${meta.estimatedTime}">${meta.estimatedTime}</div>
-            <div class="stat-label">Est. Time</div>
+          <div class="hero-stats">
+            <div class="hero-stat-item">
+              <span class="stat-number">${meta.totalQuestions}</span>
+              <span class="stat-text">Deep<br/>Questions</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="hero-stat-item">
+              <span class="stat-number">8</span>
+              <span class="stat-text">Career<br/>Dimensions</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="hero-stat-item">
+              <span class="stat-number">100%</span>
+              <span class="stat-text">Personalized<br/>Report</span>
+            </div>
           </div>
         </div>
 
-        <!-- 8 Dimension chips -->
-        <h3 class="dimensions-heading">Career Dimensions Assessed</h3>
-        <div class="landing-dimensions stagger-children" role="list" aria-label="Career dimensions assessed">
-          ${data.sections.map(s => `
-            <div class="dimension-chip" role="listitem">
-              <span class="dimension-dot" style="background:${s.color}" aria-hidden="true"></span>
-              <span aria-hidden="true">${s.icon}</span> ${s.name}
+        <!-- Right Column: Visuals & Info -->
+        <div class="landing-visuals animate-slide-in-right">
+          <div class="glass-panel">
+            <h2 class="panel-title">Why take the assessment?</h2>
+            <ul class="benefit-list">
+              <li>
+                <div class="benefit-icon">🎯</div>
+                <div class="benefit-content">
+                  <strong>Gain Self-Awareness</strong>
+                  <p>Visualize exactly what's working and what needs attention in your career right now.</p>
+                </div>
+              </li>
+              <li>
+                <div class="benefit-icon">💬</div>
+                <div class="benefit-content">
+                  <strong>Guide Conversations</strong>
+                  <p>Use your personalized radar chart to drive meaningful 1-on-1s with your manager.</p>
+                </div>
+              </li>
+              <li>
+                <div class="benefit-icon">📈</div>
+                <div class="benefit-content">
+                  <strong>Actionable Growth</strong>
+                  <p>Receive tailored insights and reflection questions to plan your next career move.</p>
+                </div>
+              </li>
+            </ul>
+
+            <h3 class="dimensions-title">Dimensions Assessed</h3>
+            <div class="dimension-chips stagger-children">
+              ${data.sections.map(s => `
+                <div class="chip">
+                  <span class="chip-dot" style="background:${s.color}"></span>
+                  ${s.name}
+                </div>
+              `).join('')}
             </div>
-          `).join('')}
+          </div>
         </div>
-
-        <div class="landing-cta">
-          <button id="start-assessment-btn" class="btn btn-primary btn-lg" aria-label="Begin the career assessment">
-            Start Assessment →
-          </button>
-        </div>
-
-        <aside class="landing-privacy" aria-label="Privacy and disclaimer information">
-          <strong>📋 Privacy & Disclaimer</strong>
-          ${meta.privacyNotice}<br/><br/>
-          <em>${meta.disclaimer}</em>
-        </aside>
       </div>
+
+      <!-- Footer / Disclaimer -->
+      <footer class="landing-footer animate-fade-in">
+        <div class="privacy-notice">
+          <strong>🔒 Privacy First</strong>
+          <p>${meta.privacyNotice} ${meta.disclaimer}</p>
+        </div>
+      </footer>
     </main>
   `;
 

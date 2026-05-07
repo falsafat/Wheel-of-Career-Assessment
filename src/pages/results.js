@@ -5,6 +5,7 @@
 
 import { getData, getScores, getCompletionDate, resetState } from '../state.js';
 import { navigate } from '../router.js';
+import { downloadPDF } from '../utils/pdf-export.js';
 import { Chart, RadarController, RadialLinearScale, PointElement, LineElement, Filler, Tooltip } from 'chart.js';
 
 // Register Chart.js components
@@ -126,7 +127,7 @@ export function renderResults(app) {
 
       <!-- Action Buttons -->
       <div class="results-actions no-print">
-        <button class="btn btn-primary btn-lg" id="print-pdf-btn" aria-label="Print or save your results as a PDF file">🖨️ Print / Save PDF</button>
+        <button class="btn btn-primary btn-lg" id="print-pdf-btn" aria-label="Download your results as a PDF file">📄 Download PDF Report</button>
         <button class="btn btn-outline" id="retake-btn" aria-label="Retake the assessment from the beginning">🔄 Retake Assessment</button>
       </div>
     </div>
@@ -145,8 +146,25 @@ export function renderResults(app) {
   });
 
   // Bind Print / PDF
-  document.getElementById('print-pdf-btn').addEventListener('click', () => {
-    window.print();
+  document.getElementById('print-pdf-btn').addEventListener('click', async (e) => {
+    const btn = e.target;
+    btn.disabled = true;
+    btn.classList.add('btn-loading');
+    btn.textContent = 'Generating...';
+
+    try {
+      showToast('Generating PDF... Please wait.');
+      const container = document.getElementById('pdf-content');
+      await downloadPDF(container, dateFileStr, scores, data);
+      showToast('PDF downloaded successfully!', 'success');
+    } catch (error) {
+      console.error(error);
+      showToast('Failed to generate PDF.', 'error');
+    } finally {
+      btn.disabled = false;
+      btn.classList.remove('btn-loading');
+      btn.textContent = '📄 Download PDF Report';
+    }
   });
 
   // Bind retake with confirmation
