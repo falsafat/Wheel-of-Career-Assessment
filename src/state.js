@@ -3,6 +3,8 @@
  * All state is in-memory only — nothing is persisted (BRSD §10.2 Option 1).
  */
 
+import assessmentData from '../data/assessment.json';
+
 const state = {
   data: null,           // Assessment JSON data
   answers: {},          // { questionId: score }
@@ -13,8 +15,7 @@ const state = {
 
 /** Load assessment data from JSON */
 export async function loadAssessmentData() {
-  const response = await fetch('/data/assessment.json');
-  state.data = await response.json();
+  state.data = assessmentData;
   return state.data;
 }
 
