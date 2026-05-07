@@ -155,6 +155,7 @@ export function renderResults(app) {
     try {
       showToast('Generating PDF... Please wait.');
       const container = document.getElementById('pdf-content');
+      await waitForChartRender();
       await downloadPDF(container, dateFileStr, scores, data);
       showToast('PDF downloaded successfully!', 'success');
     } catch (error) {
@@ -277,6 +278,15 @@ function renderWheel(scores) {
         },
       },
     },
+  });
+}
+
+function waitForChartRender() {
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => {
+      if (chartInstance) chartInstance.update('none');
+      requestAnimationFrame(resolve);
+    });
   });
 }
 
