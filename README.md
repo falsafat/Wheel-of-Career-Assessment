@@ -149,9 +149,9 @@ This is a static site — deploy the `dist/` folder to any hosting service:
 
 | Service | Command |
 |---|---|
-| **GitHub Pages** | Push `dist/` to `gh-pages` branch or use GitHub Actions |
+| **GitHub Pages** | Push to `main`; GitHub Actions builds and deploys `dist/` to `https://falsafat.github.io/Wheel-of-Career-Assessment/` |
 | **Netlify** | Set build command: `npm run build`, publish directory: `dist` |
-| **Vercel** | Set framework preset: `Vite`, output directory: `dist` |
+| **Vercel** | Use the included `vercel.json` or set framework preset: `Vite`, build command: `npm run build`, output directory: `dist` |
 | **Any web server** | Serve the `dist/` folder as static files |
 
 ---
